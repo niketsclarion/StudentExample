@@ -6,10 +6,8 @@ export class StudentController {
     constructor(private studService:StudentService = new StudentService()) {
         console.log("Student controller Object Created..")
      }
-
-     getStudents(req: restify.Request, res: restify.Response) {
-        var students: Student[] = this.studService.getAllStudent();
-        res.send(200, students);//.then(val=>{console.log("Controller",val)});
-        
+      addStudent(req: restify.Request, res: restify.Response) {
+        this.studService.addStudent(req.body);
+        res.send(200, "Success");
     }
 }
