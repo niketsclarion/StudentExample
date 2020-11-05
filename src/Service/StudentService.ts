@@ -7,8 +7,12 @@ export class StudentService {
     constructor() {
         console.log("Creating Student Service..")
     }
-     
-    addStudent(std:Student) : Student {
-        return this.stdRepo.addStudent(std);
+    async getAllStudent(): Promise<Student[]> {
+        return await this.stdRepo.getStudents();
     }
+  
+    async saveStudent(student: Student): Promise<Student> {
+        return this.stdRepo.saveStudent(student);
+    }
+ 
 }

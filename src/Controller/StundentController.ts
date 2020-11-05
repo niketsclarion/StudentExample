@@ -6,8 +6,20 @@ export class StudentController {
     constructor(private studService:StudentService = new StudentService()) {
         console.log("Student controller Object Created..")
      }
-      addStudent(req: restify.Request, res: restify.Response) {
-        this.studService.addStudent(req.body);
-        res.send(200, "Success");
+     async addStudent(req: restify.Request, res: restify.Response) {
+        var std: Student = new Student();
+        std.emaild = req.body.emaild;
+        std.mobileNo = req.body.mobileNo;
+        std.name = req.body.name;
+        var data: Student = await this.studService.saveStudent(std);
+        console.log(data);
+        res.send(200,data);
     }
+  
+    async getStudents(req: restify.Request, res: restify.Response) {
+        var students: Student[] = await this.studService.getAllStudent();
+       console.log(students);
+        res.send(200, students);
+    }
+ 
 }
